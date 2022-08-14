@@ -16,6 +16,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import LogoSecondary from "../../assets/imgs/logo-secondary.svg";
 import { Input } from "../../components/Form/Input";
 import { useState } from "react";
+import { useAuth } from "../../contexts/Auth";
 
 const signInSchema = yup.object().shape({
   email: yup.string().required("E-mail obrigatório").email("E-mail inválido!"),
@@ -29,6 +30,7 @@ interface SignInData {
 
 export const SignIn = () => {
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
   const {
     handleSubmit,
@@ -39,7 +41,12 @@ export const SignIn = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = (data: SignInData) => console.log(data);
+  const handleSignIn = ({ email, password }: SignInData) => {
+    setLoading(true);
+    signIn({ email, password })
+      .then((_) => setLoading(false))
+      .catch((_) => setLoading(false));
+  };
 
   return (
     <Flex
