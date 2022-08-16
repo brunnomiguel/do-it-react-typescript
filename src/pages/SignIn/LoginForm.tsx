@@ -2,19 +2,14 @@ import { Box, Button, Grid, Heading, Text, VStack } from "@chakra-ui/react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { signInSchema } from "./signInSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
 
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { useAuth } from "../../contexts/Auth";
-
 import { Input } from "../../components/Form/Input";
-
-const signInSchema = yup.object().shape({
-  email: yup.string().required("E-mail obrigatório").email("E-mail inválido!"),
-  password: yup.string().required("Senha obrigatória"),
-});
 
 interface SignInData {
   email: string;
@@ -23,7 +18,9 @@ interface SignInData {
 
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+
   const { signIn } = useAuth();
+  
   const history = useHistory();
 
   const {

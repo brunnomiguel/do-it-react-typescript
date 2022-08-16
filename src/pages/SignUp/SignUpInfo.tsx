@@ -8,10 +8,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { theme } from "../../styles/theme";
+
 import { FaForward } from "react-icons/fa";
 import LogoSecondary from "../../assets/imgs/logo-secondary.svg";
 import SimpleIcon from "../../assets/imgs/simple-icon.svg";
-import { theme } from "../../styles/theme";
 
 export const SignUpInfo = () => {
   return (

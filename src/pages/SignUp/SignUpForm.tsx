@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   Box,
   Button,
@@ -7,29 +10,18 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
+
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { signUpSchema } from "./signUpSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useState } from "react";
+import { api } from "../../services/api";
 
 import { Input } from "../../components/Form/Input";
-import { api } from "../../services/api";
 import { ModalSuccess } from "../../components/Modal/ModalSuccess";
 import { ModalError } from "../../components/Modal/ModalError";
-import { useHistory } from "react-router-dom";
-
-const signUpSchema = yup.object().shape({
-  name: yup.string().required("Nome obrigatório"),
-  email: yup.string().required("E-mail obrigatório").email("E-mail inválido!"),
-  password: yup.string().required("Senha obrigatória"),
-  confirmPassword: yup
-    .string()
-    .required("Confirmação de senha obrigatória!")
-    .oneOf([yup.ref("password")], "Senhas não conferem!"),
-});
 
 interface SignUpData {
   email: string;
