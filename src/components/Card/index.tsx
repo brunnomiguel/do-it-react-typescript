@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
+import { theme } from "../../styles/theme";
 
 export const Card = () => {
   return (
@@ -35,7 +36,7 @@ export const Card = () => {
             borderColor="grey.200"
             bgColor="white"
           >
-            <FaTrash color="grey.200" />
+            <FaTrash color={theme.colors.grey[200]} />
           </Center>
           <Center
             as="button"
@@ -46,7 +47,7 @@ export const Card = () => {
             borderColor="grey.200"
             bgColor="white"
           >
-            <FaCheck color="grey.200" />
+            <FaCheck color={theme.colors.grey[200]} />
           </Center>
         </HStack>
       </Flex>
