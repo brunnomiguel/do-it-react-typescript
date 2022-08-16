@@ -1,5 +1,6 @@
 import { ComponentType } from "react";
 import { Redirect, Route as ReactRoute, RouteProps } from "react-router-dom";
+
 import { useAuth } from "../contexts/Auth";
 
 interface Props extends RouteProps {

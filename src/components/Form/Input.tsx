@@ -80,6 +80,9 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           onBlurCapture={handleInputBlur}
           _hover={{ bgColor: "grey.100" }}
           _placeholder={{ color: "grey.300" }}
+          _focus={{
+            bg: "grey.100",
+          }}
           size="lg"
           h="60px"
           ref={ref}

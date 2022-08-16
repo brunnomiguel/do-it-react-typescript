@@ -1,8 +1,8 @@
 import { Center } from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
-
 import { theme } from "../../styles/theme";
+import { FaArrowLeft } from "react-icons/fa";
+
+import { useHistory } from "react-router-dom";
 
 interface GoBackButtonProps {
   top: string;
