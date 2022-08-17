@@ -8,6 +8,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
+import { useAuth } from "../../contexts/Auth";
+import { useTasks } from "../../contexts/Tasks";
 import { theme } from "../../styles/theme";
 
 interface Task {
@@ -22,6 +24,9 @@ interface CardProps {
 }
 
 export const Card = ({ task }: CardProps) => {
+  const { deleteTask, updateTask } = useTasks();
+  const { accessToken, user } = useAuth();
+
   return (
     <Box
       cursor="pointer"
@@ -46,6 +51,7 @@ export const Card = ({ task }: CardProps) => {
             borderRadius="5px"
             borderColor="grey.200"
             bgColor="white"
+            onClick={() => deleteTask(task.id, accessToken)}
           >
             <FaTrash color={theme.colors.grey[200]} />
           </Center>
@@ -57,6 +63,7 @@ export const Card = ({ task }: CardProps) => {
             borderRadius="5px"
             borderColor="grey.200"
             bgColor="white"
+            onClick={() => updateTask(task.id, user.id, accessToken)}
           >
             <FaCheck color={theme.colors.grey[200]} />
           </Center>
