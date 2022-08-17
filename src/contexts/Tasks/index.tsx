@@ -24,6 +24,12 @@ interface TasksContextData {
   tasks: Task[];
   createTask: (data: Omit<Task, "id">, accessToken: string) => Promise<void>;
   loadTasks: (userId: string, accessToken: string) => Promise<void>;
+  deleteTask: (taskId: string, accessToken: string) => Promise<void>;
+  updateTask: (
+    taskId: string,
+    userId: string,
+    accessToken: string
+  ) => Promise<void>;
 }
 
 const TasksContext = createContext<TasksContextData>({} as TasksContextData);
@@ -59,15 +65,56 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((response: AxiosResponse<Task>) =>
-          setTasks([...tasks, response.data])
+          setTasks((oldTasks) => [...oldTasks, response.data])
         )
         .catch((err) => console.log(err));
     },
     []
   );
 
+  const deleteTask = useCallback(
+    async (taskId: string, accessToken: string) => {
+      await api
+        .delete(`/tasks/${taskId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((_) => {
+          const filteredTask = tasks.filter((task) => task.id !== taskId);
+          setTasks(filteredTask);
+        })
+        .catch((err) => console.log(err));
+    },
+    [tasks]
+  );
+
+  const updateTask = useCallback(
+    async (taskId: string, userId: string, accessToken: string) => {
+      await api
+        .patch(
+          `/tasks/${taskId}`,
+          { completed: true, userId },
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        )
+        .then((_) => {
+          const filteredTask = tasks.filter((task) => task.id !== taskId);
+          const findedTask = tasks.find((task) => task.id === taskId);
+
+          if (findedTask) {
+            findedTask.completed = true;
+            setTasks([...filteredTask, findedTask]);
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [tasks]
+  );
+
   return (
-    <TasksContext.Provider value={{ tasks, createTask, loadTasks }}>
+    <TasksContext.Provider
+      value={{ tasks, createTask, loadTasks, deleteTask, updateTask }}
+    >
       {children}
     </TasksContext.Provider>
   );
