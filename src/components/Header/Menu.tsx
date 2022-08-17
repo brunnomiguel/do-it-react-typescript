@@ -10,9 +10,11 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import { useAuth } from "../../contexts/Auth";
+
 import { FiLogOut } from "react-icons/fi";
 import { theme } from "../../styles/theme";
+
+import { useAuth } from "../../contexts/Auth";
 
 interface MenuProps {
   isOpen: boolean;
