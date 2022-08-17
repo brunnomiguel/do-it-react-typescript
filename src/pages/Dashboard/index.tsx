@@ -18,6 +18,7 @@ import { ModalTaskDetail } from "../../components/Modal/ModalTaskDetails";
 
 import { useAuth } from "../../contexts/Auth";
 import { useTasks } from "../../contexts/Tasks";
+import { CardSkeleton } from "../../components/Skeleton/CardSkeleton";
 
 interface Task {
   id: string;
@@ -125,9 +126,13 @@ export const Dashboard = () => {
           paddingX="8"
           mt="8"
         >
-          {tasks.map((task) => (
-            <Card key={task.id} task={task} onFunction={handleClick} />
-          ))}
+          {loading ? (
+            <CardSkeleton repeatCount={10} />
+          ) : (
+            tasks.map((task) => (
+              <Card key={task.id} task={task} onFunction={handleClick} />
+            ))
+          )}
         </Grid>
       </Box>
     </>
