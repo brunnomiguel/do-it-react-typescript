@@ -14,9 +14,10 @@ import {
 } from "@chakra-ui/react";
 
 import { FaCheck, FaCube, FaTimes, FaTrash } from "react-icons/fa";
+import { theme } from "../../styles/theme";
+
 import { useAuth } from "../../contexts/Auth";
 import { useTasks } from "../../contexts/Tasks";
-import { theme } from "../../styles/theme";
 
 interface Task {
   id: string;

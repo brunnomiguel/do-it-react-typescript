@@ -14,10 +14,10 @@ import {
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { SearchBox } from "../../components/Form/SearchBox";
+import { ModalTaskDetail } from "../../components/Modal/ModalTaskDetails";
 
 import { useAuth } from "../../contexts/Auth";
 import { useTasks } from "../../contexts/Tasks";
-import { ModalTaskDetail } from "../../components/Modal/ModalTaskDetails";
 
 interface Task {
   id: string;
