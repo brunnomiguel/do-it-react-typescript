@@ -1,11 +1,14 @@
-import { Button, Center, Flex, useDisclosure } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { theme } from "../../styles/theme";
+
+import { Button, Center, Flex, useDisclosure } from "@chakra-ui/react";
+
 import { ModalCreateTask } from "../Modal/ModalCreateTask";
 import { Input } from "./Input";
 
 export const SearchBox = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  
   return (
     <>
       <ModalCreateTask isOpen={isOpen} onClose={onClose} />

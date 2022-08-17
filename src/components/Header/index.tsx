@@ -1,7 +1,9 @@
 import { Center, Flex, Heading, Image, useDisclosure } from "@chakra-ui/react";
+
+import { theme } from "../../styles/theme";
 import { FaTh } from "react-icons/fa";
 import LogoMin from "../../assets/imgs/logo-min.svg";
-import { theme } from "../../styles/theme";
+
 import { Menu } from "./Menu";
 
 export const Header = () => {
