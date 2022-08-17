@@ -36,7 +36,7 @@ export const Card = ({ task, onFunction }: CardProps) => {
       borderWidth="1px"
       borderColor="grey.50"
       boxShadow="base"
-      padding="7"
+      padding="5"
       w={["80vw", "auto"]}
       _hover={{ transform: "translateY(-7px)", borderColor: "grey.100" }}
       transform="border 0.2s, ease 0s, transform 0.2s"

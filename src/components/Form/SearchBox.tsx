@@ -20,9 +20,14 @@ export const SearchBox = () => {
         paddingBottom="4"
         borderBottomWidth="1px"
         borderColor="grey.50"
+        flexDir={["column", "column", "row", "row"]}
       >
         <Flex as="form">
-          <Input name="title" placeholder="Pesquisar por tarefa" w="35vw" />
+          <Input
+            name="title"
+            placeholder="Pesquisar por tarefa"
+            w={["100%", "100%", "35vw"]}
+          />
           <Center
             borderRadius="8px"
             as="button"
@@ -41,7 +46,8 @@ export const SearchBox = () => {
         <Button
           bg="purple.500"
           color="white"
-          ml="4"
+          ml={["0", "0", "4"]}
+          mt={["4", "4", "0"]}
           paddingX="16"
           h="60px"
           onClick={onOpen}
