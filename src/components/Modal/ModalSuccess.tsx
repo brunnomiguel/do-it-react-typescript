@@ -10,6 +10,7 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
+
 import { FaExclamation, FaTimes } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 

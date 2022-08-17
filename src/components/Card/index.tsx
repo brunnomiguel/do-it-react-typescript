@@ -7,10 +7,12 @@ import {
   Progress,
   Text,
 } from "@chakra-ui/react";
+
 import { FaCheck, FaTrash } from "react-icons/fa";
+import { theme } from "../../styles/theme";
+
 import { useAuth } from "../../contexts/Auth";
 import { useTasks } from "../../contexts/Tasks";
-import { theme } from "../../styles/theme";
 
 interface Task {
   id: string;
@@ -21,9 +23,10 @@ interface Task {
 
 interface CardProps {
   task: Task;
+  onFunction: (task: Task) => void;
 }
 
-export const Card = ({ task }: CardProps) => {
+export const Card = ({ task, onFunction }: CardProps) => {
   const { deleteTask, updateTask } = useTasks();
   const { accessToken, user } = useAuth();
 
@@ -34,7 +37,7 @@ export const Card = ({ task }: CardProps) => {
       borderColor="grey.50"
       boxShadow="base"
       padding="7"
-      w={["330px", "auto"]}
+      w={["80vw", "auto"]}
       _hover={{ transform: "translateY(-7px)", borderColor: "grey.100" }}
       transform="border 0.2s, ease 0s, transform 0.2s"
     >
@@ -69,7 +72,7 @@ export const Card = ({ task }: CardProps) => {
           </Center>
         </HStack>
       </Flex>
-      <Box w="100%" mt="4">
+      <Box onClick={() => onFunction(task)} w="100%" mt="4">
         <Text>{task.description}</Text>
         <Progress
           colorScheme="purple"
