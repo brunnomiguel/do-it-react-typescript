@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { Box, Grid, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Grid,
+  Heading,
+  Skeleton,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
@@ -22,7 +31,7 @@ export const Dashboard = () => {
   const [selectedTask, setSelectedTask] = useState<Task>({} as Task);
 
   const { user, accessToken } = useAuth();
-  const { tasks, loadTasks } = useTasks();
+  const { tasks, loadTasks, notFound, taskNotFound } = useTasks();
 
   const {
     isOpen: isTaskDetailOpen,
@@ -38,6 +47,66 @@ export const Dashboard = () => {
   useEffect(() => {
     loadTasks(user.id, accessToken).then((_) => setLoading(false));
   }, []);
+
+  if (notFound) {
+    return (
+      <>
+        <ModalTaskDetail
+          isOpen={isTaskDetailOpen}
+          onClose={onTaskDetailClose}
+          task={selectedTask}
+        />
+        <Box>
+          <Header />
+          <SearchBox />
+          <Center mt="4" textAlign="center" display="flex" flexDir="column">
+            <Heading size="lg">Não encontramos resultados para:</Heading>
+            <Text fontSize="xl" color="grey.300" fontWeight="bold">
+              {taskNotFound}
+            </Text>
+            <Box
+              mt="6"
+              w={["80%", "40%"]}
+              padding="6"
+              boxShadow="base"
+              bg="white"
+            >
+              <Stack>
+                <Skeleton
+                  startColor="grey.100"
+                  endColor="grey.200"
+                  h="20px"
+                  borderRadius="20px"
+                  w="80%"
+                />
+                <Skeleton
+                  startColor="grey.100"
+                  endColor="grey.200"
+                  h="20px"
+                  borderRadius="20px"
+                  w="60%"
+                />
+              </Stack>
+              <Stack mt="8">
+                <Skeleton
+                  startColor="grey.100"
+                  endColor="grey.200"
+                  h="15px"
+                  borderRadius="20px"
+                />
+                <Skeleton
+                  startColor="grey.100"
+                  endColor="grey.200"
+                  h="15px"
+                  borderRadius="20px"
+                />
+              </Stack>
+            </Box>
+          </Center>
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>
