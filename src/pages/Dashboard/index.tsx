@@ -21,7 +21,7 @@ export const Dashboard = () => {
       <SearchBox />
       <Grid
         w="100%"
-        templateColumns="repeat(auto-fill, minmax(420px, 1fr))"
+        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
         gap="10"
         paddingX="8"
         mt="8"
