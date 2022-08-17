@@ -10,7 +10,18 @@ import {
 import { FaCheck, FaTrash } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
-export const Card = () => {
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+interface CardProps {
+  task: Task;
+}
+
+export const Card = ({ task }: CardProps) => {
   return (
     <Box
       cursor="pointer"
@@ -24,7 +35,7 @@ export const Card = () => {
     >
       <Flex justifyContent="space-between">
         <Heading as="h1" size="md">
-          Studing React Js Styled Components
+          {task.title}
         </Heading>
         <HStack spacing="4">
           <Center
@@ -52,8 +63,12 @@ export const Card = () => {
         </HStack>
       </Flex>
       <Box w="100%" mt="4">
-        <Text>Estudar styled components meia hora por dia</Text>
-        <Progress colorScheme="purple" mt="2.5" value={10} />
+        <Text>{task.description}</Text>
+        <Progress
+          colorScheme="purple"
+          mt="2.5"
+          value={task.completed ? 100 : 10}
+        />
         <Text color="grey.200" mt="3">
           16 de agosto de 2022
         </Text>
