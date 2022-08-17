@@ -6,9 +6,25 @@ import { Button, Center, Flex, useDisclosure } from "@chakra-ui/react";
 import { ModalCreateTask } from "../Modal/ModalCreateTask";
 import { Input } from "./Input";
 
+import { useForm } from "react-hook-form";
+import { useTasks } from "../../contexts/Tasks";
+import { useAuth } from "../../contexts/Auth";
+
+interface SearchData {
+  title: string;
+}
+
 export const SearchBox = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  
+  const { searchTask } = useTasks();
+  const { accessToken } = useAuth();
+
+  const handleSearch = ({ title }: SearchData) => {
+    searchTask(title, accessToken);
+  };
+
+  const { register, handleSubmit } = useForm<SearchData>();
+
   return (
     <>
       <ModalCreateTask isOpen={isOpen} onClose={onClose} />
@@ -22,11 +38,11 @@ export const SearchBox = () => {
         borderColor="grey.50"
         flexDir={["column", "column", "row", "row"]}
       >
-        <Flex as="form">
+        <Flex as="form" onSubmit={handleSubmit(handleSearch)}>
           <Input
-            name="title"
             placeholder="Pesquisar por tarefa"
             w={["100%", "100%", "35vw"]}
+            {...register("title")}
           />
           <Center
             borderRadius="8px"
@@ -44,13 +60,14 @@ export const SearchBox = () => {
           </Center>
         </Flex>
         <Button
+          type="submit"
+          onClick={onOpen}
           bg="purple.500"
           color="white"
           ml={["0", "0", "4"]}
           mt={["4", "4", "0"]}
           paddingX="16"
           h="60px"
-          onClick={onOpen}
           borderRadius="8px"
           _hover={{ bg: "purple.600" }}
         >
